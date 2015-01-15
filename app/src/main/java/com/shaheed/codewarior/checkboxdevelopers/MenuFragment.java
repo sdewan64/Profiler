@@ -222,6 +222,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
                 Intent in = new Intent(currentFragment.getActivity(), AccountActivity.class);
                 in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(in);
+                getActivity().finish();
             }else{
                 //setting the statusText as the error replied from server
                 Constants.makeToast(currentFragment, replyMsg, true);
