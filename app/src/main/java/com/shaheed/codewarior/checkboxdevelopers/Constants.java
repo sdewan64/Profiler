@@ -13,9 +13,12 @@ public class Constants {
 
     public static final String URL_BASE = "http://tomcat-sdewan64.rhcloud.com/";
     public static String URL_REGISTRATION = URL_BASE + "RegistrationServlet";
+    public static String URL_LOGIN = URL_BASE + "LoginServlet";
 
     public static final String METHOD_GET = "GET";
     public static final String METHOD_POST = "POST";
+
+    public static String username = "";
 
     public static void makeToast(Fragment fragment,String message, boolean isError){
         if(!isError){

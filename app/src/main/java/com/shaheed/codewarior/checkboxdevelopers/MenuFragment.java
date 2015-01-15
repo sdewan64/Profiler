@@ -1,6 +1,7 @@
 package com.shaheed.codewarior.checkboxdevelopers;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,7 +28,7 @@ import java.util.List;
 public class MenuFragment extends Fragment implements View.OnClickListener{
 
     Button registration_signUpButton,login_loginButton;
-    EditText registration_fullName,registration_password,registration_confirmPassword,registration_email,registration_phone;
+    EditText registration_fullName,registration_password,registration_confirmPassword,registration_email,registration_phone,login_email,login_password;
     Fragment currentFragment;
 
     @Override
@@ -49,6 +50,9 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
         registration_confirmPassword = (EditText) view.findViewById(R.id.registration_edittext_confirmPassword);
         registration_email = (EditText) view.findViewById(R.id.registration_edittext_email);
         registration_phone = (EditText) view.findViewById(R.id.registration_edittext_phone);
+
+        login_email = (EditText) view.findViewById(R.id.login_edittext_email);
+        login_password = (EditText) view.findViewById(R.id.login_edittext_password);
     }
 
     private void addClickListeners() {
@@ -82,7 +86,11 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
     }
 
     private void login_loginButtonClicked() {
-        //do login
+        if(login_email.getText().toString().equals("") || login_password.getText().toString().equals("")){
+            Constants.makeToast(this, "All fields are required!", true);
+        }else {
+            new LoginUser().execute(login_email.getText().toString(),login_password.getText().toString());
+        }
     }
 
     class RegisterUserToDatabase extends AsyncTask<String, String, String>{
@@ -110,7 +118,6 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
                     sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
                 }
                 passwordHash = sb.toString();
-                Log.i("hash",passwordHash);
             }
             catch (NoSuchAlgorithmException e)
             {
@@ -152,4 +159,74 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
         }
     }
 
+    private class LoginUser extends AsyncTask<String, String, String>{
+        private boolean isDone = false;
+        private JSONObject jsonObject;
+        private JsonParser jsonParser = new JsonParser();
+        String replyMsg;
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            String email = strings[0];
+            String password = strings[1];
+
+            String passwordHash = null;
+
+            try {
+                MessageDigest md = MessageDigest.getInstance("SHA-1");
+                md.update(password.getBytes());
+                byte[] bytes = md.digest();
+                StringBuilder sb = new StringBuilder();
+                for(int i=0; i< bytes.length ;i++)
+                {
+                    sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+                }
+                passwordHash = sb.toString();
+            }
+            catch (NoSuchAlgorithmException e)
+            {
+                Log.e("HASH_ERROR","HASHING FAILED!");
+            }
+
+            List<NameValuePair> loginInfo = new ArrayList<>();
+
+            loginInfo.add(new BasicNameValuePair("email", email));
+            loginInfo.add(new BasicNameValuePair("password", passwordHash));
+
+            jsonObject = jsonParser.makeHTTPRequest(Constants.URL_LOGIN,Constants.METHOD_POST,loginInfo);
+            String reply;
+
+            try{
+                reply = jsonObject.getString("reply");
+
+                if(reply.equals("done")){
+                    isDone = true;
+                    Constants.username = jsonObject.getString("username");
+                }else{
+                    replyMsg = reply;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if(isDone){
+                //user found redirect to account menu
+                Constants.makeToast(currentFragment,"Login Successful.\nRedirecting to Account Page...",false);
+                Intent in = new Intent(currentFragment.getActivity(), AccountActivity.class);
+                in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(in);
+            }else{
+                //setting the statusText as the error replied from server
+                Constants.makeToast(currentFragment, replyMsg, true);
+            }
+
+        }
+    }
 }
