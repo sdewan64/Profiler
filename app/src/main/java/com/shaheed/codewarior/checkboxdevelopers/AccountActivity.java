@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class AccountActivity extends ActionBarActivity {
@@ -12,6 +13,8 @@ public class AccountActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
+        TextView tv = (TextView) findViewById(R.id.account_dummy);
+        tv.setText(Constants.userName);
     }
 
 

@@ -19,6 +19,7 @@ public class MainMenuActivity extends ActionBarActivity {
     private final String MENU_SIGNUP = "Sign Up";
 
     private DrawerLayout mDrawerLayout;
+
     private ListView mDrawerList;
 
     private String[] mMenu;

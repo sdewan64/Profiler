@@ -202,7 +202,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
                 if(reply.equals("done")){
                     isDone = true;
-                    Constants.username = jsonObject.getString("username");
+                    Constants.userName = jsonObject.getString("username");
                 }else{
                     replyMsg = reply;
                 }
