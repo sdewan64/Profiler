@@ -10,7 +10,7 @@
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#3497db" />
+        android:background="#ff4ddb3f" />
 
     <ListView
         android:id="@+id/drawer_list"
