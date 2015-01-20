@@ -34,7 +34,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
     private static final String VOLLEYTAG = "LoginOrRegistration";
     Button registration_signUpButton,login_loginButton;
-    EditText registration_fullName,registration_password,registration_confirmPassword,registration_email,registration_phone,login_email,login_password;
+    EditText registration_fullName,registration_password,registration_confirmPassword,registration_email,registration_address,registration_phone,login_email,login_password;
     Fragment currentFragment;
 
     ProgressDialog progressDialog;
@@ -64,6 +64,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
         registration_password = (EditText) view.findViewById(R.id.registration_edittext_password);
         registration_confirmPassword = (EditText) view.findViewById(R.id.registration_edittext_confirmPassword);
         registration_email = (EditText) view.findViewById(R.id.registration_edittext_email);
+        registration_address = (EditText) view.findViewById(R.id.registration_edittext_address);
         registration_phone = (EditText) view.findViewById(R.id.registration_edittext_phone);
 
         login_email = (EditText) view.findViewById(R.id.login_edittext_email);
@@ -113,6 +114,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
                String fullName = registration_fullName.getText().toString();
                String email = registration_email.getText().toString();
                String password = registration_password.getText().toString();
+               String address = registration_address.getText().toString();
                String phone = registration_phone.getText().toString();
 
                String passwordHash = null;
@@ -136,6 +138,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
                registrationInfo.put("fullName", fullName);
                registrationInfo.put("email", email);
                registrationInfo.put("password", passwordHash);
+               registrationInfo.put("address", address);
                registrationInfo.put("phone", phone);
 
                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Constants.URL_REGISTRATION, new JSONObject(registrationInfo), new Response.Listener<JSONObject>() {
