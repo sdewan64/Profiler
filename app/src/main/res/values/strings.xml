@@ -9,7 +9,9 @@
     <string name="menu_signup">Sign Up</string>
     <string name="menu_exit">Exit</string>
     <string name="menu_logout">Logout</string>
-    <string name="title_activity_account">AccountActivity</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_share">Share</string>
+    <string name="title_activity_account">Account</string>
 
 
 

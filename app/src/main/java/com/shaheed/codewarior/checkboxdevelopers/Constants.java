@@ -38,7 +38,4 @@ public class Constants {
             toast.show();
         }
     }
-
-
-
 }
