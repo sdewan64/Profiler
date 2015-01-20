@@ -2,6 +2,7 @@ package com.shaheed.codewarior.checkboxdevelopers;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -25,11 +26,24 @@ public class MainMenuActivity extends ActionBarActivity {
     private String[] mMenu;
     private ArrayAdapter<String> adapter;
 
+    private SessionManager sessionManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+        sessionManager = new SessionManager(getApplicationContext());
+
+        if(sessionManager.isUserLoggedIn()){
+            Constants.makeToast(this,"Login Information Found.\nRedirecting to Account Page...",false);
+            Intent in = new Intent(this, AccountActivity.class);
+            in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(in);
+            finish();
+        }
 
         mMenu = new String[]{MENU_LOGIN, MENU_SIGNUP};
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);

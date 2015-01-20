@@ -105,7 +105,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
     private void registration_signUpButtonClicked(){
        if(registration_fullName.getText().toString().equals("") || registration_password.getText().toString().equals("") || registration_confirmPassword.getText().toString().equals("") || registration_email.getText().toString().equals("") || registration_phone.getText().toString().equals("")){
-           Constants.makeToast(this, "All fields are required!", true);
+           Constants.makeToast(this.getActivity(), "All fields are required!", true);
        }else{
            if(registration_password.getText().toString().equals(registration_confirmPassword.getText().toString())){
                showProgressDialogue("Registering User","Please wait while we register your information");
@@ -163,7 +163,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
                    @Override
                    public void onErrorResponse(VolleyError volleyError) {
                        closeProgressDialogue();
-                       Constants.makeToast(currentFragment,"Network Error",true);
+                       Constants.makeToast(currentFragment.getActivity(),"Network Error",true);
                        Log.e("Volley Error", volleyError.toString());
                    }
                });
@@ -171,23 +171,23 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
                VolleyController.getInstance().addNewToRequestQueue(jsonObjectRequest, VOLLEYTAG);
 
            }else{
-               Constants.makeToast(this, "Password and Confirm Password did not match!", true);
+               Constants.makeToast(this.getActivity(), "Password and Confirm Password did not match!", true);
            }
        }
     }
 
     private void gotRegistrationResponse(Boolean isDone){
         if(isDone) {
-            Constants.makeToast(currentFragment, "Registration was successful.\nYou can login now", false);
+            Constants.makeToast(currentFragment.getActivity(), "Registration was successful.\nYou can login now", false);
         }
         else{
-            Constants.makeToast(currentFragment, "Registration was unsuccessful!", true);
+            Constants.makeToast(currentFragment.getActivity(), "Registration was unsuccessful!", true);
         }
     }
 
     private void login_loginButtonClicked() {
         if(login_email.getText().toString().equals("") || login_password.getText().toString().equals("")){
-            Constants.makeToast(this, "All fields are required!", true);
+            Constants.makeToast(this.getActivity(), "All fields are required!", true);
         }else {
             showProgressDialogue("Logging In","Please wait while we check...");
             progressDialog.setCancelable(false);
@@ -228,7 +228,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
                         if(reply.equals("done")){
                             isDone = true;
-                            Constants.userName = jsonObject.getString("username");
+                            Constants.userId = jsonObject.getString("userid");
                         }else{
                             replyMsg = reply;
                         }
@@ -241,7 +241,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
                     closeProgressDialogue();
-                    Constants.makeToast(currentFragment,"Network Error",true);
+                    Constants.makeToast(currentFragment.getActivity(),"Network Error",true);
                     Log.e("Volley Error", volleyError.toString());
                 }
             });
@@ -251,8 +251,12 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
     private void gotLoginResponse(Boolean isDone, String replyMsg){
         if(isDone){
-            //user found redirect to account menu
-            Constants.makeToast(currentFragment,"Login Successful.\nRedirecting to Account Page...",false);
+            //user found making session and redirecting to account menu
+
+            SessionManager sessionManager = new SessionManager(getActivity().getApplicationContext());
+            sessionManager.createNewLoginSession(Constants.userId);
+
+            Constants.makeToast(currentFragment.getActivity(),"Login Successful.\nRedirecting to Account Page...",false);
             Intent in = new Intent(currentFragment.getActivity(), AccountActivity.class);
             in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -260,7 +264,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
             getActivity().finish();
         }else{
             //setting the statusText as the error replied from server
-            Constants.makeToast(currentFragment, replyMsg, true);
+            Constants.makeToast(currentFragment.getActivity(), replyMsg, true);
         }
     }
 }
