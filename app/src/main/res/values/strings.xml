@@ -24,5 +24,7 @@
     <string name="account_oldPassword">Old Password : </string>
     <string name="account_newPassword">New Password : </string>
     <string name="account_newConfirmPassword">Confirm New Password : </string>
+    <string name="title_activity_social_sign_up">Social Sign Up</string>
+    <string name="menu_social_signup">Signup with Social Network</string>
 
 </resources>

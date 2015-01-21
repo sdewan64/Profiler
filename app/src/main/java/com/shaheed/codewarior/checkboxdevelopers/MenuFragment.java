@@ -33,7 +33,7 @@ import java.util.HashMap;
 public class MenuFragment extends Fragment implements View.OnClickListener{
 
     private static final String VOLLEYTAG = "LoginOrRegistration";
-    Button registration_signUpButton,login_loginButton;
+    Button registration_signUpButton,registration_socialSignupButton,login_loginButton;
     EditText registration_fullName,registration_password,registration_confirmPassword,registration_email,registration_address,registration_phone,login_email,login_password;
     Fragment currentFragment;
 
@@ -59,6 +59,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
     private void findViewsById(View view) {
         registration_signUpButton = (Button) view.findViewById(R.id.registration_button_signup);
         login_loginButton = (Button) view.findViewById(R.id.login_button_login);
+        registration_socialSignupButton = (Button) view.findViewById(R.id.registration_button_socialSignup);
 
         registration_fullName = (EditText) view.findViewById(R.id.registration_edittext_fullName);
         registration_password = (EditText) view.findViewById(R.id.registration_edittext_password);
@@ -74,6 +75,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
     private void addClickListeners() {
         if(registration_signUpButton!=null) registration_signUpButton.setOnClickListener(this);
         if(login_loginButton!=null) login_loginButton.setOnClickListener(this);
+        if(registration_socialSignupButton!=null) registration_socialSignupButton.setOnClickListener(this);
     }
 
     @Override
@@ -85,6 +87,11 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
             case R.id.registration_button_signup: registration_signUpButtonClicked();
                 break;
             case R.id.login_button_login: login_loginButtonClicked();
+                break;
+            case R.id.registration_button_socialSignup:
+                Intent in = new Intent(currentFragment.getActivity(), SocialSignUpActivity.class);
+                in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(in);
                 break;
         }
     }

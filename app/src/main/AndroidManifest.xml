@@ -24,6 +24,10 @@
             android:name=".AccountActivity"
             android:label="@string/title_activity_account" >
         </activity>
+        <activity
+            android:name=".SocialSignUpActivity"
+            android:label="@string/title_activity_social_sign_up" >
+        </activity>
     </application>
 
 </manifest>
