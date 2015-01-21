@@ -4,10 +4,10 @@
     tools:context="com.shaheed.codewarior.checkboxdevelopers.AccountActivity">
     <item android:id="@+id/action_account_logout" android:title="@string/menu_logout"
         app:showAsAction="always"
-        android:icon="@drawable/login"/>
+        android:icon="@drawable/logout"/>
     <item android:id="@+id/action_account_edit" android:title="@string/menu_edit"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/user"/>
+        android:icon="@drawable/edit"/>
     <item android:id="@+id/action_account_share" android:title="@string/menu_share"
         app:showAsAction="ifRoom"
         android:icon="@drawable/password"/>

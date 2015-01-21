@@ -37,7 +37,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
     EditText registration_fullName,registration_password,registration_confirmPassword,registration_email,registration_address,registration_phone,login_email,login_password;
     Fragment currentFragment;
 
-    ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -89,26 +89,12 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    private void showProgressDialogue(String title,String msg){
-        progressDialog.setTitle(title);
-        progressDialog.setMessage(msg);
-        if(!progressDialog.isShowing()){
-            progressDialog.show();
-        }
-    }
-
-    private void closeProgressDialogue(){
-        if(progressDialog.isShowing()){
-            progressDialog.dismiss();
-        }
-    }
-
     private void registration_signUpButtonClicked(){
        if(registration_fullName.getText().toString().equals("") || registration_password.getText().toString().equals("") || registration_confirmPassword.getText().toString().equals("") || registration_email.getText().toString().equals("") || registration_phone.getText().toString().equals("")){
            Constants.makeToast(this.getActivity(), "All fields are required!", true);
        }else{
            if(registration_password.getText().toString().equals(registration_confirmPassword.getText().toString())){
-               showProgressDialogue("Registering User","Please wait while we register your information");
+               Constants.showProgressDialogue(progressDialog,"Registering User","Please wait while we register your information");
                progressDialog.setCancelable(false);
 
                String fullName = registration_fullName.getText().toString();
@@ -144,7 +130,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Constants.URL_REGISTRATION, new JSONObject(registrationInfo), new Response.Listener<JSONObject>() {
                    @Override
                    public void onResponse(JSONObject jsonObject) {
-                       closeProgressDialogue();
+                       Constants.closeProgressDialogue(progressDialog);
                        Boolean isDone = false;
                        String reply;
 
@@ -162,7 +148,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
                }, new Response.ErrorListener() {
                    @Override
                    public void onErrorResponse(VolleyError volleyError) {
-                       closeProgressDialogue();
+                       Constants.closeProgressDialogue(progressDialog);
                        Constants.makeToast(currentFragment.getActivity(),"Network Error",true);
                        Log.e("Volley Error", volleyError.toString());
                    }
@@ -189,7 +175,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
         if(login_email.getText().toString().equals("") || login_password.getText().toString().equals("")){
             Constants.makeToast(this.getActivity(), "All fields are required!", true);
         }else {
-            showProgressDialogue("Logging In","Please wait while we check...");
+            Constants.showProgressDialogue(progressDialog,"Logging In","Please wait while we check...");
             progressDialog.setCancelable(false);
 
             String email = login_email.getText().toString();
@@ -219,7 +205,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,Constants.URL_LOGIN, new JSONObject(loginInfo), new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject jsonObject) {
-                    closeProgressDialogue();
+                    Constants.closeProgressDialogue(progressDialog);
                     String reply;
                     String replyMsg = "";
                     Boolean isDone = false;
@@ -240,7 +226,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
-                    closeProgressDialogue();
+                    Constants.closeProgressDialogue(progressDialog);
                     Constants.makeToast(currentFragment.getActivity(),"Network Error",true);
                     Log.e("Volley Error", volleyError.toString());
                 }

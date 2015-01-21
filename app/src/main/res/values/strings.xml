@@ -20,5 +20,6 @@
     <string name="account_oldpassword">Old Password : </string>
     <string name="account_newpassword">New Password : </string>
     <string name="account_confirmpassword">Confirm Password : </string>
+    <string name="network_fetching">Fetching ... </string>
 
 </resources>

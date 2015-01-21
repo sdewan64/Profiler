@@ -1,6 +1,7 @@
 package com.shaheed.codewarior.checkboxdevelopers;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ public class Constants {
     public static final String URL_BASE = "http://tomcat-sdewan64.rhcloud.com/";
     public static String URL_REGISTRATION = URL_BASE + "RegistrationServlet";
     public static String URL_LOGIN = URL_BASE + "LoginServlet";
+    public static String URL_FETCH = URL_BASE + "FetchUser";
 
     public static String userId = "";
 
@@ -36,6 +38,20 @@ public class Constants {
             toastView.setTextColor(Color.RED);
             toastView.setGravity(Gravity.CENTER);
             toast.show();
+        }
+    }
+
+    public static void showProgressDialogue(ProgressDialog progressDialog,String title,String msg){
+        progressDialog.setTitle(title);
+        progressDialog.setMessage(msg);
+        if(!progressDialog.isShowing()){
+            progressDialog.show();
+        }
+    }
+
+    public static void closeProgressDialogue(ProgressDialog progressDialog){
+        if(progressDialog.isShowing()){
+            progressDialog.dismiss();
         }
     }
 }
