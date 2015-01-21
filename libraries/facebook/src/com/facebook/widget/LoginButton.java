@@ -518,8 +518,8 @@ public class LoginButton extends Button {
     }
     
     /**
-     * Return the current {@link ToolTipMode} for this LoginButton
-     * @return The {@link ToolTipMode}
+     * Return the current {@link com.facebook.widget.LoginButton.ToolTipMode} for this LoginButton
+     * @return The {@link com.facebook.widget.LoginButton.ToolTipMode}
      */
     public ToolTipMode getToolTipMode() {
         return nuxMode;

@@ -53,7 +53,7 @@ import java.util.*;
  * </p>
  * <p>
  * Instances of Session provide state change notification via a callback
- * interface, {@link Session.StatusCallback StatusCallback}.
+ * interface, {@link com.facebook.Session.StatusCallback StatusCallback}.
  * </p>
  */
 public class Session implements Serializable {
@@ -67,7 +67,7 @@ public class Session implements Serializable {
     /**
      * The default activity code used for authorization.
      *
-     * @see #openForRead(OpenRequest)
+     * @see #openForRead(com.facebook.Session.OpenRequest)
      *      open
      */
     public static final int DEFAULT_AUTHORIZE_ACTIVITY_CODE = 0xface;
@@ -1008,7 +1008,7 @@ public class Session implements Serializable {
      * @param activity     The Activity that is opening the new Session.
      * @param allowLoginUI if false, only sets the active session and opens it if it
      *                     does not require user interaction
-     * @param callback     The {@link StatusCallback SessionStatusCallback} to
+     * @param callback     The {@link com.facebook.Session.StatusCallback SessionStatusCallback} to
      *                     notify regarding Session state changes. May be null.
      * @return The new Session or null if one could not be created
      */
@@ -1032,7 +1032,7 @@ public class Session implements Serializable {
      * @param allowLoginUI if false, only sets the active session and opens it if it
      *                     does not require user interaction
      * @param permissions  The permissions to request for this Session
-     * @param callback     The {@link StatusCallback SessionStatusCallback} to
+     * @param callback     The {@link com.facebook.Session.StatusCallback SessionStatusCallback} to
      *                     notify regarding Session state changes. May be null.
      * @return The new Session or null if one could not be created
      */
@@ -1058,7 +1058,7 @@ public class Session implements Serializable {
      * @param fragment     The Fragment that is opening the new Session.
      * @param allowLoginUI if false, only sets the active session and opens it if it
      *                     does not require user interaction
-     * @param callback     The {@link StatusCallback SessionStatusCallback} to
+     * @param callback     The {@link com.facebook.Session.StatusCallback SessionStatusCallback} to
      *                     notify regarding Session state changes.
      * @return The new Session or null if one could not be created
      */
@@ -1083,7 +1083,7 @@ public class Session implements Serializable {
      * @param allowLoginUI if false, only sets the active session and opens it if it
      *                     does not require user interaction
      * @param permissions  The permissions to request for this Session
-     * @param callback     The {@link StatusCallback SessionStatusCallback} to
+     * @param callback     The {@link com.facebook.Session.StatusCallback SessionStatusCallback} to
      *                     notify regarding Session state changes.
      * @return The new Session or null if one could not be created
      */
@@ -1742,7 +1742,7 @@ public class Session implements Serializable {
     /**
      * Provides asynchronous notification of Session state changes.
      *
-     * @see Session#open open
+     * @see com.facebook.Session#open open
      */
     public interface StatusCallback {
         /**
@@ -1887,7 +1887,7 @@ public class Session implements Serializable {
     }
 
     /**
-     * Base class for authorization requests {@link OpenRequest} and {@link NewPermissionsRequest}.
+     * Base class for authorization requests {@link com.facebook.Session.OpenRequest} and {@link com.facebook.Session.NewPermissionsRequest}.
      */
     public static class AuthorizationRequest implements Serializable {
 
@@ -2139,7 +2139,7 @@ public class Session implements Serializable {
         /**
          * Sets the StatusCallback for the OpenRequest.
          *
-         * @param statusCallback The {@link StatusCallback SessionStatusCallback} to
+         * @param statusCallback The {@link com.facebook.Session.StatusCallback SessionStatusCallback} to
          *                       notify regarding Session state changes.
          * @return the OpenRequest object to allow for chaining
          */
@@ -2267,7 +2267,7 @@ public class Session implements Serializable {
          * Sets the StatusCallback for the NewPermissionsRequest. Note that once the request is made, this callback
          * will be added to the session, and will receive all future state changes on the session.
          *
-         * @param statusCallback The {@link StatusCallback SessionStatusCallback} to
+         * @param statusCallback The {@link com.facebook.Session.StatusCallback SessionStatusCallback} to
          *                       notify regarding Session state changes.
          * @return the NewPermissionsRequest object to allow for chaining
          */

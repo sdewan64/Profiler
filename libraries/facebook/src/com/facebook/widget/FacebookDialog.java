@@ -111,7 +111,7 @@ public class FacebookDialog {
     /**
      * Defines a set of features that may be supported by the native Share dialog exposed by the Facebook application.
      * As additional features are added, these flags may be passed to
-     * {@link FacebookDialog#canPresentShareDialog(android.content.Context,
+     * {@link com.facebook.widget.FacebookDialog#canPresentShareDialog(android.content.Context,
      * com.facebook.widget.FacebookDialog.ShareDialogFeature...)}
      * to determine whether the version of the Facebook application installed on the user's device is recent
      * enough to support specific features, which in turn may be used to determine which UI, etc., to present to the
@@ -157,7 +157,7 @@ public class FacebookDialog {
     /**
      * Defines a set of features that may be supported by the native Message dialog exposed by the Facebook Messenger application.
      * As additional features are added, these flags may be passed to
-     * {@link FacebookDialog#canPresentMessageDialog(android.content.Context,
+     * {@link com.facebook.widget.FacebookDialog#canPresentMessageDialog(android.content.Context,
      * com.facebook.widget.FacebookDialog.MessageDialogFeature...)}
      * to determine whether the version of the Facebook application installed on the user's device is recent
      * enough to support specific features, which in turn may be used to determine which UI, etc., to present to the
@@ -204,7 +204,7 @@ public class FacebookDialog {
     /**
      * Defines a set of features that may be supported by the native Open Graph dialogs exposed by the Facebook
      * application. As additional features are added, these flags may be passed to
-     * {@link FacebookDialog#canPresentOpenGraphActionDialog(android.content.Context,
+     * {@link com.facebook.widget.FacebookDialog#canPresentOpenGraphActionDialog(android.content.Context,
      * com.facebook.widget.FacebookDialog.OpenGraphActionDialogFeature...)}
      * to determine whether the version of the Facebook application installed on the user's device is recent
      * enough to support specific features, which in turn may be used to determine which UI, etc., to present to the
@@ -241,7 +241,7 @@ public class FacebookDialog {
     /**
      * Defines a set of features that may be supported by the native Open Graph Message dialogs exposed by the Facebook
      * application. As additional features are added, these flags may be passed to
-     * {@link FacebookDialog#canPresentOpenGraphMessageDialog(android.content.Context,
+     * {@link com.facebook.widget.FacebookDialog#canPresentOpenGraphMessageDialog(android.content.Context,
      * com.facebook.widget.FacebookDialog.OpenGraphMessageDialogFeature...)}
      * to determine whether the version of the Facebook application installed on the user's device is recent
      * enough to support specific features, which in turn may be used to determine which UI, etc., to present to the
@@ -402,7 +402,7 @@ public class FacebookDialog {
      * which UI, etc., to present to the user.
      *
      * @param context  the calling Context
-     * @param features zero or more features to check for; {@link ShareDialogFeature#SHARE_DIALOG} is implicitly checked
+     * @param features zero or more features to check for; {@link com.facebook.widget.FacebookDialog.ShareDialogFeature#SHARE_DIALOG} is implicitly checked
      *                 if not explicitly specified
      * @return true if all of the specified features are supported by the currently installed version of the
      *         Facebook application; false if any of the features are not supported
@@ -432,7 +432,7 @@ public class FacebookDialog {
      * determine which UI, etc., to present to the user.
      *
      * @param context  the calling Context
-     * @param features zero or more features to check for; {@link OpenGraphActionDialogFeature#OG_ACTION_DIALOG} is implicitly
+     * @param features zero or more features to check for; {@link com.facebook.widget.FacebookDialog.OpenGraphActionDialogFeature#OG_ACTION_DIALOG} is implicitly
      *                 checked if not explicitly specified
      * @return true if all of the specified features are supported by the currently installed version of the
      *         Facebook application; false if any of the features are not supported
@@ -1018,7 +1018,7 @@ public class FacebookDialog {
     /**
      * Provides a builder which can construct a FacebookDialog instance suitable for presenting the native
      * Share dialog. This builder will throw an exception if the Facebook application is not installed, so it
-     * should only be used if {@link FacebookDialog#canPresentShareDialog(android.content.Context,
+     * should only be used if {@link com.facebook.widget.FacebookDialog#canPresentShareDialog(android.content.Context,
      * com.facebook.widget.FacebookDialog.ShareDialogFeature...)}  indicates the capability is available.
      */
     public static class ShareDialogBuilder extends ShareDialogBuilderBase<ShareDialogBuilder> {
@@ -1162,7 +1162,7 @@ public class FacebookDialog {
     /**
      * Provides a builder which can construct a FacebookDialog instance suitable for presenting the native
      * Share dialog for sharing photos. This builder will throw an exception if the Facebook application is not
-     * installed, so it should only be used if {@link FacebookDialog#canPresentShareDialog(android.content.Context,
+     * installed, so it should only be used if {@link com.facebook.widget.FacebookDialog#canPresentShareDialog(android.content.Context,
      * com.facebook.widget.FacebookDialog.ShareDialogFeature...)}  indicates the capability is available.
      */
     public static class PhotoShareDialogBuilder extends PhotoDialogBuilderBase<PhotoShareDialogBuilder> {
@@ -1189,7 +1189,7 @@ public class FacebookDialog {
     /**
      * Provides a builder which can construct a FacebookDialog instance suitable for presenting the native
      * Message dialog for sharing photos. This builder will throw an exception if the Messenger application is not
-     * installed, so it should only be used if {@link FacebookDialog#canPresentMessageDialog(android.content.Context,
+     * installed, so it should only be used if {@link com.facebook.widget.FacebookDialog#canPresentMessageDialog(android.content.Context,
      * com.facebook.widget.FacebookDialog.MessageDialogFeature...)} indicates the capability is available.
      */
     public static class PhotoMessageDialogBuilder extends PhotoDialogBuilderBase<PhotoMessageDialogBuilder> {
@@ -1313,7 +1313,7 @@ public class FacebookDialog {
     /**
      * Provides a builder which can construct a FacebookDialog instance suitable for presenting the native
      * Share dialog for sharing videos. This builder will throw an exception if the Facebook application is not
-     * installed, so it should only be used if {@link FacebookDialog#canPresentShareDialog(android.content.Context,
+     * installed, so it should only be used if {@link com.facebook.widget.FacebookDialog#canPresentShareDialog(android.content.Context,
      * com.facebook.widget.FacebookDialog.ShareDialogFeature...)} indicates the capability is available.
      */
     public static class VideoShareDialogBuilder extends VideoDialogBuilderBase<VideoShareDialogBuilder> {
@@ -1335,7 +1335,7 @@ public class FacebookDialog {
     /**
      * Provides a builder which can construct a FacebookDialog instance suitable for presenting the native
      * Message dialog for sharing videos. This builder will throw an exception if the Messenger application is not
-     * installed, so it should only be used if {@link FacebookDialog#canPresentMessageDialog(android.content.Context,
+     * installed, so it should only be used if {@link com.facebook.widget.FacebookDialog#canPresentMessageDialog(android.content.Context,
      * com.facebook.widget.FacebookDialog.MessageDialogFeature...)} indicates the capability is available.
      */
     public static class VideoMessageDialogBuilder extends VideoDialogBuilderBase<VideoMessageDialogBuilder> {
@@ -1368,7 +1368,7 @@ public class FacebookDialog {
     /**
      * Provides a builder which can construct a FacebookDialog instance suitable for presenting the native
      * Message dialog. This builder will throw an exception if the Facebook Messenger application is not installed, so it
-     * should only be used if {@link FacebookDialog#canPresentMessageDialog(android.content.Context,
+     * should only be used if {@link com.facebook.widget.FacebookDialog#canPresentMessageDialog(android.content.Context,
      * com.facebook.widget.FacebookDialog.MessageDialogFeature...)}  indicates the capability is available.
      * The "friends" and "place" properties will be ignored as the Facebook Messenger app does not support tagging.
      */
@@ -1875,7 +1875,7 @@ public class FacebookDialog {
      * Open Graph action publish dialog. This builder allows the caller to specify binary images for both the
      * action and any Open Graph objects to be created prior to publishing the action.
      * This builder will throw an exception if the Facebook application is not installed, so it
-     * should only be used if {@link FacebookDialog#canPresentOpenGraphActionDialog(android.content.Context,
+     * should only be used if {@link com.facebook.widget.FacebookDialog#canPresentOpenGraphActionDialog(android.content.Context,
      * com.facebook.widget.FacebookDialog.OpenGraphActionDialogFeature...)} indicates the capability is available.
      */
     public static class OpenGraphActionDialogBuilder extends OpenGraphDialogBuilderBase<OpenGraphActionDialogBuilder> {
@@ -1925,7 +1925,7 @@ public class FacebookDialog {
      * Open Graph action message dialog. This builder allows the caller to specify binary images for both the
      * action and any Open Graph objects to be created prior to publishing the action.
      * This builder will throw an exception if the Facebook application is not installed, so it
-     * should only be used if {@link FacebookDialog#canPresentOpenGraphMessageDialog(android.content.Context,
+     * should only be used if {@link com.facebook.widget.FacebookDialog#canPresentOpenGraphMessageDialog(android.content.Context,
      * com.facebook.widget.FacebookDialog.OpenGraphMessageDialogFeature...)} indicates the capability is available.
      */
     public static class OpenGraphMessageDialogBuilder extends OpenGraphDialogBuilderBase<OpenGraphMessageDialogBuilder> {

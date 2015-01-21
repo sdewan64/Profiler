@@ -271,6 +271,12 @@ public class AccountActivity extends ActionBarActivity {
                 getEditView();
                 return true;
             case R.id.action_account_share :
+                Intent in = new Intent(this, SocialSignUpActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("isShare","true");
+                in.putExtras(bundle);
+                in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(in);
                 return  true;
         }
         return super.onOptionsItemSelected(item);

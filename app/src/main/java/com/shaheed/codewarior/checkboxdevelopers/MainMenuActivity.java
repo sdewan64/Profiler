@@ -44,6 +44,19 @@ public class MainMenuActivity extends ActionBarActivity {
             finish();
         }
 
+        if(getIntent().getExtras() != null){
+            Fragment menuFragment = new MenuFragment();
+            Bundle fragmentArgs = new Bundle();
+            fragmentArgs.putString("FragmentId", String.valueOf(R.layout.registration_fragment));
+            fragmentArgs.putString("isFb", "true");
+            fragmentArgs.putString("fbName", getIntent().getExtras().getString("fbName"));
+            fragmentArgs.putString("fbEmail", getIntent().getExtras().getString("fbEmail"));
+            fragmentArgs.putString("fbAddress",getIntent().getExtras().getString("fbAddress"));
+            menuFragment.setArguments(fragmentArgs);
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, menuFragment).commit();
+        }
+
         mMenu = new String[]{MENU_LOGIN, MENU_SIGNUP};
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.drawer_list);

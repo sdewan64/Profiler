@@ -200,7 +200,7 @@ public final class Settings {
     }
 
     /**
-     * This method is deprecated.  Use {@link Settings#isDebugEnabled()} instead.
+     * This method is deprecated.  Use {@link com.facebook.Settings#isDebugEnabled()} instead.
      */
     @Deprecated
     public static final boolean isLoggingEnabled() {
@@ -208,7 +208,7 @@ public final class Settings {
     }
 
     /**
-     * This method is deprecated.  Use {@link Settings#setIsDebugEnabled(boolean)} instead.
+     * This method is deprecated.  Use {@link com.facebook.Settings#setIsDebugEnabled(boolean)} instead.
      */
     @Deprecated
     public static final void setIsLoggingEnabled(boolean enabled) {

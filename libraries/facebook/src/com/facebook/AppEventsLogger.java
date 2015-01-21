@@ -251,7 +251,7 @@ public class AppEventsLogger {
      * your app becomes active, typically in the onResume() method of each long-running Activity of your app.
      *
      * Use this method if your application ID is stored in application metadata, otherwise see
-     * {@link AppEventsLogger#activateApp(android.content.Context, String)}.
+     * {@link com.facebook.AppEventsLogger#activateApp(android.content.Context, String)}.
      *
      * @param context Used to access the applicationId and the attributionId for non-authenticated users.
      */
@@ -303,7 +303,7 @@ public class AppEventsLogger {
      * inactive, typically in the onPause() method of each long-running Activity of your app.
      *
      * Use this method if your application ID is stored in application metadata, otherwise see
-     * {@link AppEventsLogger#deactivateApp(android.content.Context, String)}.
+     * {@link com.facebook.AppEventsLogger#deactivateApp(android.content.Context, String)}.
      *
      * @param context Used to access the applicationId and the attributionId for non-authenticated users.
      */

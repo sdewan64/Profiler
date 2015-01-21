@@ -75,19 +75,21 @@ public class SocialSignUpActivity extends Activity
 
                     if(user!=null)
                     {
-                        Bundle fragmentArgs = new Bundle();
-                        fragmentArgs.putString("FragmentId", String.valueOf(R.layout.registration_fragment));
-                        fragmentArgs.putString("isFb", "true");
-                        fragmentArgs.putString("fbName", user.getName());
-                        fragmentArgs.putString("fbEmail", user.getProperty("email")+"");
-                        fragmentArgs.putString("fbAddress",user.getLocation().getName());
+                        if(getIntent().getExtras().getString("isShare").equals("false")){
+                            Bundle fragmentArgs = new Bundle();
+                            fragmentArgs.putString("FragmentId", String.valueOf(R.layout.registration_fragment));
+                            fragmentArgs.putString("isFb", "true");
+                            fragmentArgs.putString("fbName", user.getName());
+                            fragmentArgs.putString("fbEmail", user.getProperty("email")+"");
+                            fragmentArgs.putString("fbAddress",user.getLocation().getName());
 
-                        Intent in = new Intent(activity, MainMenuActivity.class);
-                        in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        in.putExtras(fragmentArgs);
-                        startActivity(in);
-                        finish();
+                            Intent in = new Intent(activity, MainMenuActivity.class);
+                            in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            in.putExtras(fragmentArgs);
+                            startActivity(in);
+                            finish();
+                        }
                     }
                     else
                     {
@@ -123,7 +125,8 @@ public class SocialSignUpActivity extends Activity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         uihelper.onSaveInstanceState(outState);
-
+        outState.putBoolean(PENDING_PUBLISH_KEY, pendingPublishReauthorization);
+        uihelper.onSaveInstanceState(outState);
     }
 
     @Override
@@ -151,7 +154,19 @@ public class SocialSignUpActivity extends Activity
         setContentView(R.layout.activity_social_sign_up);
         uihelper =new UiLifecycleHelper(this,callback);
         uihelper.onCreate(savedInstanceState);
-        shareButton = (Button) findViewById(R.id.shareButton);
+        activity = this;
+        shareButton = (Button) findViewById(R.id.social_button_fbShare);
+
+        //force hide
+        if(getIntent().getExtras().getString("isShare").equals("false")){
+            shareButton.setVisibility(View.INVISIBLE);
+        }else{
+            shareButton.setVisibility(View.VISIBLE);
+        }
+
+        if(savedInstanceState!=null){
+            pendingPublishReauthorization = savedInstanceState.getBoolean(PENDING_PUBLISH_KEY,false);
+        }
 
         ArrayList<String> permission =new ArrayList<>();
         permission.add("email");
@@ -175,7 +190,7 @@ public class SocialSignUpActivity extends Activity
         {
             e.printStackTrace();
         }
-        shareButton = (Button) findViewById(R.id.shareButton);
+        shareButton = (Button) findViewById(R.id.social_button_fbShare);
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -45,6 +45,16 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(Integer.parseInt(fragmentId), container, false);
         findViewsById(view);
         addClickListeners();
+
+        if(getArguments()!=null){
+            if(getArguments().getString("isFb")!=null){
+                registration_fullName.setText(getArguments().getString("fbName"));
+                registration_email.setText(getArguments().getString("fbEmail"));
+                registration_address.setText(getArguments().getString("fbAddress"));
+            }
+        }
+
+
         progressDialog = new ProgressDialog(getActivity());
         return view;
     }
@@ -90,6 +100,9 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.registration_button_socialSignup:
                 Intent in = new Intent(currentFragment.getActivity(), SocialSignUpActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("isShare","false");
+                in.putExtras(bundle);
                 in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(in);
                 break;
