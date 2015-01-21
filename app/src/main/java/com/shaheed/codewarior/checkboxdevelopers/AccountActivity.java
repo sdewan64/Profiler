@@ -1,18 +1,13 @@
 package com.shaheed.codewarior.checkboxdevelopers;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 
 public class AccountActivity extends ActionBarActivity {
-
-    Button account_logout;
-    TextView tv;
 
     SessionManager sessionManager;
 
@@ -31,24 +26,14 @@ public class AccountActivity extends ActionBarActivity {
 
         findViewsById();
         implementButtons();
-        TextView tv = (TextView) findViewById(R.id.account_dummy);
-
-        tv.setText(Constants.userId);
     }
 
     private void findViewsById(){
-        tv = (TextView) findViewById(R.id.account_dummy);
-        account_logout = (Button) findViewById(R.id.account_button_logout);
 
     }
 
     private void implementButtons() {
-        account_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sessionManager.logoutUser();
-            }
-        });
+
     }
 
 
@@ -61,15 +46,15 @@ public class AccountActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        //if (id == R.id.action_settings) {
-        //    return true;
-       // }
+        switch (item.getItemId()){
+            case R.id.action_account_logout :
+                sessionManager.logoutUser();
+                return true;
+            case R.id.action_account_edit :
+                Intent in = new Intent(this, AccountEditActivity.class);
+                in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(in);
+        }
 
         return super.onOptionsItemSelected(item);
     }

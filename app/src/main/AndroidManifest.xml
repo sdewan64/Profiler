@@ -6,11 +6,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".VolleyController"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:name=".VolleyController" >
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".MainMenuActivity"
             android:label="@string/app_name" >
@@ -23,6 +23,14 @@
         <activity
             android:name=".AccountActivity"
             android:label="@string/title_activity_account" >
+        </activity>
+        <activity
+            android:name=".AccountEditActivity"
+            android:label="@string/title_activity_account_edit"
+            android:parentActivityName=".AccountActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.shaheed.codewarior.checkboxdevelopers.AccountActivity" />
         </activity>
     </application>
 
