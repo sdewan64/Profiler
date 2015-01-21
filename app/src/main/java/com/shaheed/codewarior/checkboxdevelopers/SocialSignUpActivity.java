@@ -217,8 +217,10 @@ public class SocialSignUpActivity extends Activity
 
             Bundle postParams = new Bundle();
             postParams.putString("name", "Profiler by Checkbox Developers");
+            postParams.putString("caption", "Profiler by Checkbox Developers");
+            postParams.putString("description", "Profiler by Checkbox Developers");
             postParams.putString("link", "https://github.com/sdewan64/Profiler");
-            postParams.putString("picture", "http://sharewithsagar.netau.net/upload/9beabf6d1a6b640129b91da84aee27e8105asdasdsadasdb3bf8474166a43e4ab99f7b2c1d6602d");
+            postParams.putString("picture", "https://raw.github.com/fbsamples/ios-3.x-howtos/master/Images/iossdk_logo.png");
 
             Request.Callback callback= new Request.Callback() {
                 public void onCompleted(Response response) {
@@ -239,7 +241,7 @@ public class SocialSignUpActivity extends Activity
                                 Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getApplicationContext(),
-                                "Posted",
+                                "POSTED",
                                 Toast.LENGTH_LONG).show();
                     }
                 }
