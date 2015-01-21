@@ -1,9 +1,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="fill_parent"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.shaheed.codewarior.checkboxdevelopers.AccountActivity"
-    android:background="#ff4ddb3f"
+    android:background="#d3d3d3"
     >
 
     <LinearLayout
@@ -12,7 +12,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
-        android:background="#ff4ddb3f"
+        android:background="#d3d3d3"
         android:orientation="vertical"
         >
 
@@ -20,9 +20,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="30dp"
-            android:textColor="#ffffff"
+            android:textColor="#000"
             android:gravity="center_vertical"
             android:text="@string/app_name"
+            android:layout_gravity="center_horizontal"
             />
         <TextView
             android:layout_width="wrap_content"

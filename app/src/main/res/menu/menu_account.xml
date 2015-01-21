@@ -10,5 +10,5 @@
         android:icon="@drawable/edit"/>
     <item android:id="@+id/action_account_share" android:title="@string/menu_share"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/password"/>
+        android:icon="@drawable/share"/>
 </menu>

@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-
 public class MainMenuActivity extends ActionBarActivity {
 
     private final String MENU_LOGIN = "Login";
@@ -49,9 +48,9 @@ public class MainMenuActivity extends ActionBarActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.drawer_list);
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_selectable_list_item, mMenu);
+        adapter = new ArrayAdapter<>(this, R.layout.menu_fragment, mMenu);
         mDrawerList.setAdapter(adapter);
-        mDrawerList.setSelector(android.R.color.holo_blue_dark);
+        //mDrawerList.setSelector(android.R.color.holo_orange_dark);
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -89,7 +88,7 @@ public class MainMenuActivity extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        //int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         //if (id == R.id.action_settings) {

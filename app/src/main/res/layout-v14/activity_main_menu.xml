@@ -22,7 +22,7 @@
 
     <ListView
         android:id="@+id/drawer_list"
-        android:layout_width="240dp"
+        android:layout_width="140dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"

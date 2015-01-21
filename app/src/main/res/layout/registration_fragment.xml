@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="fill_parent"
+    android:background="#d3d3d3">
 
     <LinearLayout
         android:orientation="vertical"
         android:gravity="center"
-        android:background="#ff4ddb3f"
+        android:background="#d3d3d3"
         android:layout_width="match_parent" android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="35dp"
-            android:textColor="#ffffff"
-            android:gravity="center_vertical"
+            android:textColor="#000"
+            android:gravity="center_horizontal"
             android:text="@string/app_name"
             />
 

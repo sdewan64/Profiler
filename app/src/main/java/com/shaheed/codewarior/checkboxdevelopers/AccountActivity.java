@@ -1,5 +1,6 @@
 package com.shaheed.codewarior.checkboxdevelopers;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -30,11 +31,14 @@ public class AccountActivity extends ActionBarActivity {
 
     private ProgressDialog progressDialog;
 
+    private Activity currentActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
+        currentActivity = this;
         sessionManager = new SessionManager(getApplicationContext());
 
         if(sessionManager.checkLogin()) {
@@ -84,7 +88,7 @@ public class AccountActivity extends ActionBarActivity {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
                 Constants.closeProgressDialogue(progressDialog);
-                Constants.makeToast((android.app.Activity) getApplicationContext(), "Network Error\\nCould not Retrieve user information", true);
+                Constants.makeToast(currentActivity, "Network Error\\nCould not Retrieve user information", true);
                 Log.e("Volley Error", volleyError.toString());
             }
         });
