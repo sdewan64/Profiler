@@ -12,7 +12,13 @@
     <string name="menu_edit">Edit</string>
     <string name="menu_share">Share</string>
     <string name="title_activity_account">Account</string>
-
-
+    <string name="title_activity_account_edit">Edit Account</string>
+    <string name="account_name">Name : </string>
+    <string name="account_email">Email : </string>
+    <string name="account_address">Address : </string>
+    <string name="account_phonenumber">Phone Number : </string>
+    <string name="account_oldpassword">Old Password : </string>
+    <string name="account_newpassword">New Password : </string>
+    <string name="account_confirmpassword">Confirm Password : </string>
 
 </resources>
