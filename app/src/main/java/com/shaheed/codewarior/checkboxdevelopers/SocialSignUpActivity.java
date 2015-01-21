@@ -216,11 +216,9 @@ public class SocialSignUpActivity extends Activity
             }
 
             Bundle postParams = new Bundle();
-            postParams.putString("name", "Facebook SDK for Android");
-            postParams.putString("caption", "Build great social apps and get more installs.");
-            postParams.putString("description", "The Facebook SDK for Android makes it easier and faster to develop Facebook integrated Android apps.");
-            postParams.putString("link", "https://developers.facebook.com/android");
-            postParams.putString("picture", "https://raw.github.com/fbsamples/ios-3.x-howtos/master/Images/iossdk_logo.png");
+            postParams.putString("name", "Profiler by Checkbox Developers");
+            postParams.putString("link", "https://github.com/sdewan64/Profiler");
+            postParams.putString("picture", "http://sharewithsagar.netau.net/upload/9beabf6d1a6b640129b91da84aee27e8105asdasdsadasdb3bf8474166a43e4ab99f7b2c1d6602d");
 
             Request.Callback callback= new Request.Callback() {
                 public void onCompleted(Response response) {
@@ -241,7 +239,7 @@ public class SocialSignUpActivity extends Activity
                                 Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getApplicationContext(),
-                                postId,
+                                "Posted",
                                 Toast.LENGTH_LONG).show();
                     }
                 }
