@@ -50,7 +50,6 @@ public class MainMenuActivity extends ActionBarActivity {
 
         adapter = new ArrayAdapter<>(this, R.layout.menu_fragment, mMenu);
         mDrawerList.setAdapter(adapter);
-        //mDrawerList.setSelector(android.R.color.holo_orange_dark);
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
