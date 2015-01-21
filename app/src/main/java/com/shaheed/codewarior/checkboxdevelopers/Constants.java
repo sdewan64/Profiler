@@ -20,6 +20,7 @@ public class Constants {
     public static String URL_REGISTRATION = URL_BASE + "RegistrationServlet";
     public static String URL_LOGIN = URL_BASE + "LoginServlet";
     public static String URL_FETCH = URL_BASE + "FetchUser";
+    public static String URL_UPDATE = URL_BASE + "UpdateServlet";
 
     public static String userId = "";
 

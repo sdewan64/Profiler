@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="#000"
             android:gravity="center_vertical"
             android:text="@string/app_name"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/account_name"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:id="@+id/textView"
             android:editable="false"
             android:background="@android:color/transparent"
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/account_email"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:id="@+id/textView2"
             android:layout_marginTop="20dp"/>
 
@@ -59,9 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-            android:ems="10"
             android:id="@+id/account_editText_email"
-
             android:editable="false"
             android:background="@android:color/transparent"
             android:text="@string/network_fetching"
@@ -72,7 +70,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/account_address"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:id="@+id/textView3"
             android:layout_marginTop="20dp"/>
 
@@ -80,7 +78,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
-            android:ems="10"
             android:id="@+id/account_editText_address"
             android:editable="false"
             android:background="@android:color/transparent"
@@ -92,7 +89,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/account_phonenumber"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:id="@+id/textView4"
             android:layout_marginTop="20dp"/>
 
@@ -100,14 +97,89 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="phone"
-            android:ems="10"
             android:id="@+id/account_editText_phonenumber"
-
-            android:layout_marginBottom="20dp"
             android:editable="false"
             android:background="@android:color/transparent"
             android:text="@string/network_fetching"
             android:focusable="false"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/account_oldPassword"
+            android:textSize="20sp"
+            android:id="@+id/account_texview_oldPassword"
+            android:layout_marginTop="20dp"
+            android:visibility="invisible"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:id="@+id/account_editText_oldPassword"
+            android:layout_marginBottom="20dp"
+            android:editable="false"
+            android:background="@android:color/transparent"
+            android:focusable="false"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/account_newPassword"
+            android:textSize="20sp"
+            android:id="@+id/account_texview_newPassword"
+            android:layout_marginTop="20dp"
+            android:visibility="invisible"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:id="@+id/account_editText_newPassword"
+            android:layout_marginBottom="20dp"
+            android:editable="false"
+            android:background="@android:color/transparent"
+            android:focusable="false"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/account_newConfirmPassword"
+            android:textSize="20sp"
+            android:id="@+id/account_texview_newConfrimPassword"
+            android:layout_marginTop="20dp"
+            android:visibility="invisible"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:id="@+id/account_editText_newConfirmPassword"
+            android:layout_marginBottom="20dp"
+            android:editable="false"
+            android:background="@android:color/transparent"
+            android:focusable="false"
+            android:visibility="invisible"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_edit"
+            android:id="@+id/account_button_edit"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/login"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            android:visibility="invisible"/>
 
 
     </LinearLayout>

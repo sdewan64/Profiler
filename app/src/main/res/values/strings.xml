@@ -21,5 +21,8 @@
     <string name="account_newpassword">New Password : </string>
     <string name="account_confirmpassword">Confirm Password : </string>
     <string name="network_fetching">Fetching ... </string>
+    <string name="account_oldPassword">Old Password : </string>
+    <string name="account_newPassword">New Password : </string>
+    <string name="account_newConfirmPassword">Confirm New Password : </string>
 
 </resources>
