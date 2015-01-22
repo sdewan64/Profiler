@@ -105,7 +105,7 @@ public class SocialSignUpActivity extends Activity
             shareButton.setVisibility(View.INVISIBLE);
             Log.i("facebook", "Logged out...");
         }
-        shareButton.setVisibility(View.VISIBLE);
+        //shareButton.setVisibility(View.VISIBLE);
         if (pendingPublishReauthorization &&
                 state.equals(SessionState.OPENED_TOKEN_UPDATED)) {
             pendingPublishReauthorization = false;
@@ -156,14 +156,14 @@ public class SocialSignUpActivity extends Activity
         uihelper.onCreate(savedInstanceState);
         activity = this;
         shareButton = (Button) findViewById(R.id.social_button_fbShare);
-
+/*
         //force hide
         if(getIntent().getExtras().getString("isShare").equals("false")){
             shareButton.setVisibility(View.INVISIBLE);
         }else{
             shareButton.setVisibility(View.VISIBLE);
         }
-
+*/
         if(savedInstanceState!=null){
             pendingPublishReauthorization = savedInstanceState.getBoolean(PENDING_PUBLISH_KEY,false);
         }
@@ -216,9 +216,9 @@ public class SocialSignUpActivity extends Activity
             }
 
             Bundle postParams = new Bundle();
-            postParams.putString("name", "Profiler by Checkbox Developers");
-            postParams.putString("caption", "Profiler by Checkbox Developers");
-            postParams.putString("description", "Profiler by Checkbox Developers");
+            postParams.putString("name", "Name");
+            postParams.putString("caption", "Caption");
+            postParams.putString("description", "description");
             postParams.putString("link", "https://github.com/sdewan64/Profiler");
             postParams.putString("picture", "https://raw.github.com/fbsamples/ios-3.x-howtos/master/Images/iossdk_logo.png");
 
