@@ -10,7 +10,7 @@
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000" >
+        android:background="#d3d3d3" >
 
         <ImageView
             android:layout_width="match_parent"
@@ -18,6 +18,13 @@
             android:id="@+id/imageView"
             android:layout_gravity="center"
             android:background="@drawable/logo"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_button_swipe"
+            android:layout_gravity="left|top"
+            android:background="@drawable/swipebutton"/>
     </FrameLayout>
 
     <ListView

@@ -47,7 +47,15 @@
             android:id="@+id/fbbtn"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:visibility="gone"
             />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/social_button_fbLoginFake"
+            android:background="@drawable/getfromfb"
+            android:layout_gravity="center_horizontal" />
 
         <Button
             android:layout_width="wrap_content"

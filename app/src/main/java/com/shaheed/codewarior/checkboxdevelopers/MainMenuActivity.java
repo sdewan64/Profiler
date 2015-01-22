@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 public class MainMenuActivity extends ActionBarActivity {
@@ -22,10 +24,12 @@ public class MainMenuActivity extends ActionBarActivity {
 
     private ListView mDrawerList;
 
-    private String[] mMenu;
+    private String[] mMenu  = new String[]{MENU_LOGIN, MENU_SIGNUP};;
     private ArrayAdapter<String> adapter;
 
     private SessionManager sessionManager;
+
+    private ImageButton main_swipeButton;
 
 
     @Override
@@ -57,9 +61,9 @@ public class MainMenuActivity extends ActionBarActivity {
             fragmentManager.beginTransaction().replace(R.id.content_frame, menuFragment).commit();
         }
 
-        mMenu = new String[]{MENU_LOGIN, MENU_SIGNUP};
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.drawer_list);
+        main_swipeButton = (ImageButton) findViewById(R.id.main_button_swipe);
 
         adapter = new ArrayAdapter<>(this, R.layout.menu_fragment, mMenu);
         mDrawerList.setAdapter(adapter);
@@ -85,6 +89,14 @@ public class MainMenuActivity extends ActionBarActivity {
 
             }
         });
+
+        main_swipeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawerLayout.openDrawer(Gravity.START);
+            }
+        });
+
     }
 
 

@@ -114,67 +114,72 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
            Constants.makeToast(this.getActivity(), "All fields are required!", true);
        }else{
            if(registration_password.getText().toString().equals(registration_confirmPassword.getText().toString())){
-               Constants.showProgressDialogue(progressDialog,"Registering User","Please wait while we register your information");
-               progressDialog.setCancelable(false);
+               if(!Constants.isValidEmail(registration_email.getText().toString())){
+                   Constants.makeToast(currentFragment.getActivity(),"Valid Email Address Required", true);
+               }else {
 
-               String fullName = registration_fullName.getText().toString();
-               String email = registration_email.getText().toString();
-               String password = registration_password.getText().toString();
-               String address = registration_address.getText().toString();
-               String phone = registration_phone.getText().toString();
+                   Constants.showProgressDialogue(progressDialog,"Registering User","Please wait while we register your information");
+                   progressDialog.setCancelable(false);
 
-               String passwordHash = null;
+                   String fullName = registration_fullName.getText().toString();
+                   String email = registration_email.getText().toString();
+                   String password = registration_password.getText().toString();
+                   String address = registration_address.getText().toString();
+                   String phone = registration_phone.getText().toString();
 
-               try {
-                   MessageDigest md = MessageDigest.getInstance("SHA-1");
-                   md.update(password.getBytes());
-                   byte[] bytes = md.digest();
-                   StringBuilder sb = new StringBuilder();
-                   for (byte aByte : bytes) {
-                       sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
-                   }
-                   passwordHash = sb.toString();
-               }
-               catch (NoSuchAlgorithmException e)
-               {
-                   Log.e("HASH_ERROR","HASHING FAILED!");
-               }
+                   String passwordHash = null;
 
-               HashMap<String, String> registrationInfo = new HashMap<>();
-               registrationInfo.put("fullName", fullName);
-               registrationInfo.put("email", email);
-               registrationInfo.put("password", passwordHash);
-               registrationInfo.put("address", address);
-               registrationInfo.put("phone", phone);
-
-               JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Constants.URL_REGISTRATION, new JSONObject(registrationInfo), new Response.Listener<JSONObject>() {
-                   @Override
-                   public void onResponse(JSONObject jsonObject) {
-                       Constants.closeProgressDialogue(progressDialog);
-                       Boolean isDone = false;
-                       String reply;
-
-                       try{
-                           reply = jsonObject.getString("reply");
-
-                           if(reply.equals("done")){
-                               isDone = true;
-                           }
-                       } catch (JSONException e) {
-                           Log.e("JSON_ERROR","Could not retrieve return data");
+                   try {
+                       MessageDigest md = MessageDigest.getInstance("SHA-1");
+                       md.update(password.getBytes());
+                       byte[] bytes = md.digest();
+                       StringBuilder sb = new StringBuilder();
+                       for (byte aByte : bytes) {
+                           sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
                        }
-                       gotRegistrationResponse(isDone);
+                       passwordHash = sb.toString();
                    }
-               }, new Response.ErrorListener() {
-                   @Override
-                   public void onErrorResponse(VolleyError volleyError) {
-                       Constants.closeProgressDialogue(progressDialog);
-                       Constants.makeToast(currentFragment.getActivity(),"Network Error",true);
-                       Log.e("Volley Error", volleyError.toString());
+                   catch (NoSuchAlgorithmException e)
+                   {
+                       Log.e("HASH_ERROR","HASHING FAILED!");
                    }
-               });
 
-               VolleyController.getInstance().addNewToRequestQueue(jsonObjectRequest, VOLLEYTAG);
+                   HashMap<String, String> registrationInfo = new HashMap<>();
+                   registrationInfo.put("fullName", fullName);
+                   registrationInfo.put("email", email);
+                   registrationInfo.put("password", passwordHash);
+                   registrationInfo.put("address", address);
+                   registrationInfo.put("phone", phone);
+
+                   JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Constants.URL_REGISTRATION, new JSONObject(registrationInfo), new Response.Listener<JSONObject>() {
+                       @Override
+                       public void onResponse(JSONObject jsonObject) {
+                           Constants.closeProgressDialogue(progressDialog);
+                           Boolean isDone = false;
+                           String reply;
+
+                           try{
+                               reply = jsonObject.getString("reply");
+
+                               if(reply.equals("done")){
+                                   isDone = true;
+                               }
+                           } catch (JSONException e) {
+                               Log.e("JSON_ERROR","Could not retrieve return data");
+                           }
+                           gotRegistrationResponse(isDone);
+                       }
+                   }, new Response.ErrorListener() {
+                       @Override
+                       public void onErrorResponse(VolleyError volleyError) {
+                           Constants.closeProgressDialogue(progressDialog);
+                           Constants.makeToast(currentFragment.getActivity(),"Network Error",true);
+                           Log.e("Volley Error", volleyError.toString());
+                       }
+                   });
+
+                   VolleyController.getInstance().addNewToRequestQueue(jsonObjectRequest, VOLLEYTAG);
+               }
 
            }else{
                Constants.makeToast(this.getActivity(), "Password and Confirm Password did not match!", true);
