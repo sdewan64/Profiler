@@ -47,6 +47,7 @@ public class AccountActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
+        getSupportActionBar().setIcon(R.drawable.logo2);
         currentActivity = this;
         sessionManager = new SessionManager(getApplicationContext());
 
@@ -212,11 +213,7 @@ public class AccountActivity extends ActionBarActivity {
                                 try{
                                     reply = jsonObject.getString("reply");
 
-                                    if(reply.equals("done")){
-                                        isDone = true;
-                                    }else {
-                                        isDone = false;
-                                    }
+                                    isDone = reply.equals("done");
                                 } catch (JSONException e) {
                                     Log.e("JSON_ERROR","Could not retrieve return data");
                                 }

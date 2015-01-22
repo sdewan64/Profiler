@@ -1,31 +1,65 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
-    android:layout_height="fill_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="#d3d3d3"
-    android:orientation="vertical"
-    android:gravity="center"
-    tools:context="com.shaheed.codewarior.checkboxdevelopers.SocialSignUpActivity">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    android:layout_gravity="center"
+    android:background="#d3d3d3" >
 
-    <com.facebook.widget.LoginButton
-        android:id="@+id/fbbtn"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        />
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+        android:layout_height="fill_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:background="#d3d3d3"
+        android:orientation="vertical"
+        android:gravity="center"
+        tools:context="com.shaheed.codewarior.checkboxdevelopers.SocialSignUpActivity">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/menu_share"
-        android:id="@+id/social_button_fbShare"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:background="@drawable/login"
-        android:layout_marginTop="20dp"
-        android:visibility="invisible"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="35dp"
+            android:textColor="#000"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:layout_marginBottom="40dp"
+            />
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/social_edittext_message"
+            android:inputType="textMultiLine"
+            android:gravity="center"
+            android:hint="@string/share_message"
+            android:text="@string/share_default_message" />
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/social_edittext_link"
+            android:gravity="center"
+            android:hint="@string/menu_link"
+            android:text="@string/share_default_link"
+            android:layout_marginTop="20dp"/>
 
-</LinearLayout>
+        <com.facebook.widget.LoginButton
+            android:id="@+id/fbbtn"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_share"
+            android:id="@+id/social_button_fbShare"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:background="@drawable/login"
+            android:layout_marginTop="20dp"
+            android:visibility="invisible"/>
+
+    </LinearLayout>
+
+</ScrollView>

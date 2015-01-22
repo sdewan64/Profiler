@@ -27,6 +27,10 @@
     <string name="title_activity_social_sign_up">Social Sign Up</string>
     <string name="menu_social_signup">Signup with Social Network</string>
     <string name="facebook_app_id">637137979724925</string>
+    <string name="share_message">What\'s on your mind</string>
+    <string name="share_default_message">Shared from Checkbox developers Profiler App</string>
+    <string name="menu_link">Link</string>
+    <string name="share_default_link">http://www.checkboxdevelopers.com</string>
 
 
 </resources>

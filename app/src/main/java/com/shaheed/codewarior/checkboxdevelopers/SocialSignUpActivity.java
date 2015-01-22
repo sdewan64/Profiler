@@ -10,7 +10,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.EditText;
 
 import com.facebook.Request;
 import com.facebook.Response;
@@ -28,14 +28,12 @@ public class SocialSignUpActivity extends Activity
     private Activity activity;
     private Button shareButton;
     private UiLifecycleHelper uihelper;
-    //private static final List<String> PERMISSIONS = Arrays.asList("publish_actions");
-    private static final String PENDING_PUBLISH_KEY = "pendingPublishReauthorization";
-    private boolean pendingPublishReauthorization = false;
 
+    private EditText social_message,social_link;
 
-    void showMsg(String string)
+    void showMsg(String msg)
     {
-        Toast.makeText(getApplicationContext(), string, Toast.LENGTH_SHORT).show();
+        Constants.makeToast(activity, msg, true);
     }
 
 
@@ -45,7 +43,6 @@ public class SocialSignUpActivity extends Activity
         @Override
         public void call(Session session, SessionState state, Exception exception)
         {
-
             onSessionStateChange(session,state,exception);
         }
     };
@@ -55,7 +52,6 @@ public class SocialSignUpActivity extends Activity
     {
         if (state.isOpened())
         {
-            shareButton.setVisibility(View.VISIBLE);
             Log.i("facebook", "Logged in...");
             Request.newMeRequest(session, new Request.GraphUserCallback()
             {
@@ -63,10 +59,10 @@ public class SocialSignUpActivity extends Activity
                 @Override
                 public void onCompleted(GraphUser user, Response response)
                 {
-
                     if(user!=null)
                     {
                         if(getIntent().getExtras().getString("isShare").equals("false")){
+                            Constants.makeToast(activity,"Found your information.\nPlease wait while we redirect you to registration page.",false);
                             Bundle fragmentArgs = new Bundle();
                             fragmentArgs.putString("FragmentId", String.valueOf(R.layout.registration_fragment));
                             fragmentArgs.putString("isFb", "true");
@@ -93,16 +89,8 @@ public class SocialSignUpActivity extends Activity
         }
         else if (state.isClosed())
         {
-            shareButton.setVisibility(View.INVISIBLE);
             Log.i("facebook", "Logged out...");
         }
-        //shareButton.setVisibility(View.VISIBLE);
-        if (pendingPublishReauthorization &&
-                state.equals(SessionState.OPENED_TOKEN_UPDATED)) {
-            pendingPublishReauthorization = false;
-            publishStory();
-        }
-
     }
 
 
@@ -115,8 +103,6 @@ public class SocialSignUpActivity extends Activity
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        uihelper.onSaveInstanceState(outState);
-        outState.putBoolean(PENDING_PUBLISH_KEY, pendingPublishReauthorization);
         uihelper.onSaveInstanceState(outState);
     }
 
@@ -143,27 +129,39 @@ public class SocialSignUpActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social_sign_up);
+
         uihelper =new UiLifecycleHelper(this,callback);
         uihelper.onCreate(savedInstanceState);
+
         activity = this;
         shareButton = (Button) findViewById(R.id.social_button_fbShare);
 
-        if(!getIntent().getExtras().getString("isShare").equals("false")){
-            shareButton.setVisibility(View.VISIBLE);
-        }
-
-        if(savedInstanceState!=null){
-            pendingPublishReauthorization = savedInstanceState.getBoolean(PENDING_PUBLISH_KEY,false);
-        }
+        social_message = (EditText) findViewById(R.id.social_edittext_message);
+        social_link = (EditText) findViewById(R.id.social_edittext_link);
 
         ArrayList<String> permission =new ArrayList<>();
         permission.add("email");
         permission.add("public_profile");
-        permission.add("user_friends");
+        permission.add("user_location");
         permission.add("publish_actions");
 
-        LoginButton btn=(LoginButton)findViewById(R.id.fbbtn);
-        btn.setPublishPermissions(permission);
+        LoginButton socialLoginButton=(LoginButton) findViewById(R.id.fbbtn);
+        socialLoginButton.setPublishPermissions(permission);
+
+        if(getIntent().getExtras().getString("isShare").equals("true")){
+        shareButton.setVisibility(View.VISIBLE);
+        social_message.setVisibility(View.VISIBLE);
+        social_link.setVisibility(View.VISIBLE);
+
+        socialLoginButton.setVisibility(View.GONE);
+    }else {
+        shareButton.setVisibility(View.GONE);
+        social_message.setVisibility(View.GONE);
+        social_link.setVisibility(View.GONE);
+
+        socialLoginButton.setVisibility(View.VISIBLE);
+    }
+
 
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
@@ -179,19 +177,41 @@ public class SocialSignUpActivity extends Activity
         {
             e.printStackTrace();
         }
+
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                publishStory();
+
+                handleShare(social_message.getText().toString(),social_link.getText().toString());
+            }
+        });
+
+        social_message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                social_message.setText("");
+            }
+        });
+
+        social_link.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                social_link.setText("");
             }
         });
     }
-    private void publishStory() {
+    private void handleShare(String msg,String link) {
+        if(msg == null || msg.equals("")){
+            msg = getString(R.string.share_default_message);
+        }
+        if(link == null || link.equals("") || !link.startsWith("http")){
+            link = getString(R.string.share_default_link);
+        }
+
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
-        String whatToShare = "Test share";
-        shareIntent.putExtra(Intent.EXTRA_TEXT,whatToShare);
-        startActivity(Intent.createChooser(shareIntent, "Share via"));
+        shareIntent.putExtra(Intent.EXTRA_TEXT, msg+"\n"+link);
+        startActivity(Intent.createChooser(shareIntent, "Share with..."));
     }
 
 
