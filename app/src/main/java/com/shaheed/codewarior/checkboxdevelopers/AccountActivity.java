@@ -345,6 +345,6 @@ public class AccountActivity extends ActionBarActivity {
         account_name.setFocusableInTouchMode(true);
         account_name.setClickable(true);
 
-        getEditTextBackground();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) getEditTextBackground();
     }
 }

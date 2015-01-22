@@ -8,7 +8,7 @@
     <application
         android:name=".VolleyController"
         android:allowBackup="true"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/logo2"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity

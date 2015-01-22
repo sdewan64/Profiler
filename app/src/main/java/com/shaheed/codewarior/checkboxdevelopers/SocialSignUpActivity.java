@@ -1,22 +1,5 @@
 package com.shaheed.codewarior.checkboxdevelopers;
 
-import java.security.MessageDigest;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
-import com.facebook.FacebookRequestError;
-import com.facebook.HttpMethod;
-import com.facebook.Request;
-import com.facebook.RequestAsyncTask;
-import com.facebook.Response;
-import com.facebook.Session;
-import com.facebook.SessionState;
-import com.facebook.UiLifecycleHelper;
-import com.facebook.model.GraphUser;
-import com.facebook.widget.LoginButton;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -29,15 +12,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
+import com.facebook.model.GraphUser;
+import com.facebook.widget.LoginButton;
+
+import java.security.MessageDigest;
+import java.util.ArrayList;
 
 public class SocialSignUpActivity extends Activity
 {
     private Activity activity;
     private Button shareButton;
     private UiLifecycleHelper uihelper;
-    private static final List<String> PERMISSIONS = Arrays.asList("publish_actions");
+    //private static final List<String> PERMISSIONS = Arrays.asList("publish_actions");
     private static final String PENDING_PUBLISH_KEY = "pendingPublishReauthorization";
     private boolean pendingPublishReauthorization = false;
 
@@ -79,9 +70,9 @@ public class SocialSignUpActivity extends Activity
                             Bundle fragmentArgs = new Bundle();
                             fragmentArgs.putString("FragmentId", String.valueOf(R.layout.registration_fragment));
                             fragmentArgs.putString("isFb", "true");
-                            fragmentArgs.putString("fbName", user.getName());
-                            fragmentArgs.putString("fbEmail", user.getProperty("email")+"");
-                            fragmentArgs.putString("fbAddress",user.getLocation().getName());
+                            if(user.getName()!=null) fragmentArgs.putString("fbName", user.getName());
+                            if(user.getProperty("email")!=null) fragmentArgs.putString("fbEmail", user.getProperty("email")+"");
+                            if(user.getLocation()!=null && user.getLocation().getName()!=null) fragmentArgs.putString("fbAddress",user.getLocation().getName());
 
                             Intent in = new Intent(activity, MainMenuActivity.class);
                             in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -156,14 +147,11 @@ public class SocialSignUpActivity extends Activity
         uihelper.onCreate(savedInstanceState);
         activity = this;
         shareButton = (Button) findViewById(R.id.social_button_fbShare);
-/*
-        //force hide
-        if(getIntent().getExtras().getString("isShare").equals("false")){
-            shareButton.setVisibility(View.INVISIBLE);
-        }else{
+
+        if(!getIntent().getExtras().getString("isShare").equals("false")){
             shareButton.setVisibility(View.VISIBLE);
         }
-*/
+
         if(savedInstanceState!=null){
             pendingPublishReauthorization = savedInstanceState.getBoolean(PENDING_PUBLISH_KEY,false);
         }
@@ -172,6 +160,7 @@ public class SocialSignUpActivity extends Activity
         permission.add("email");
         permission.add("public_profile");
         permission.add("user_friends");
+        permission.add("publish_actions");
 
         LoginButton btn=(LoginButton)findViewById(R.id.fbbtn);
         btn.setPublishPermissions(permission);
@@ -190,79 +179,21 @@ public class SocialSignUpActivity extends Activity
         {
             e.printStackTrace();
         }
-        shareButton = (Button) findViewById(R.id.social_button_fbShare);
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 publishStory();
             }
         });
-
-
     }
     private void publishStory() {
-        Session session = Session.getActiveSession();
-
-        if (session != null){
-
-            // Check for publish permissions
-            List<String> permissions = session.getPermissions();
-            if (!isSubsetOf(PERMISSIONS, permissions)) {
-                pendingPublishReauthorization = true;
-                Session.NewPermissionsRequest newPermissionsRequest = new Session
-                        .NewPermissionsRequest(this, PERMISSIONS);
-                session.requestNewPublishPermissions(newPermissionsRequest);
-                return;
-            }
-
-            Bundle postParams = new Bundle();
-            postParams.putString("name", "Name");
-            postParams.putString("caption", "Caption");
-            postParams.putString("description", "description");
-            postParams.putString("link", "https://github.com/sdewan64/Profiler");
-            postParams.putString("picture", "https://raw.github.com/fbsamples/ios-3.x-howtos/master/Images/iossdk_logo.png");
-
-            Request.Callback callback= new Request.Callback() {
-                public void onCompleted(Response response) {
-                    JSONObject graphResponse = response
-                            .getGraphObject()
-                            .getInnerJSONObject();
-                    String postId = null;
-                    try {
-                        postId = graphResponse.getString("id");
-                    } catch (JSONException e) {
-                        Log.i("TAG",
-                                "JSON error "+ e.getMessage());
-                    }
-                    FacebookRequestError error = response.getError();
-                    if (error != null) {
-                        Toast.makeText(getApplicationContext(),
-                                error.getErrorMessage(),
-                                Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(),
-                                "Posted",
-                                Toast.LENGTH_LONG).show();
-                    }
-                }
-            };
-
-            Request request = new Request(session, "me/feed", postParams,
-                    HttpMethod.POST, callback);
-
-            RequestAsyncTask task = new RequestAsyncTask(request);
-            task.execute();
-        }
-
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        String whatToShare = "Test share";
+        shareIntent.putExtra(Intent.EXTRA_TEXT,whatToShare);
+        startActivity(Intent.createChooser(shareIntent, "Share via"));
     }
-    private boolean isSubsetOf(Collection<String> subset, Collection<String> superset) {
-        for (String string : subset) {
-            if (!superset.contains(string)) {
-                return false;
-            }
-        }
-        return true;
-    }
+
 
 
 
