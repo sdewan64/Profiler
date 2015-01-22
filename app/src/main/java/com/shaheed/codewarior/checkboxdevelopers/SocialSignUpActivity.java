@@ -241,7 +241,7 @@ public class SocialSignUpActivity extends Activity
                                 Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getApplicationContext(),
-                                "POSTED",
+                                "Posted",
                                 Toast.LENGTH_LONG).show();
                     }
                 }
